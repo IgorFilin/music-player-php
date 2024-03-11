@@ -20,7 +20,16 @@ class YandexDiskWorker {
    }
 
    public function sendQueryYaDisk (string $urlQuery, string $methodQuery = 'GET'):void {
-    //  $curl = curl_init($urlQuery);
-     var_dump((string)$urlQuery);
+     $arrayRequest = [
+      'GET'    => 'CURLOPT_URL',
+      'POST'   => 'CURLOPT_POST',
+      'PUT'    => 'CURLOPT_PUT',
+      'DELETE' => 'CURLOPT_CUSTOMREQUEST',
+     ];
+     $curl = curl_init($urlQuery);
+
+     curl_setopt($curl,$arrayRequest[$methodQuery],true);
+     $resultQuery = curl_exec($curl);
+     var_dump($resultQuery);
    }
 }

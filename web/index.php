@@ -38,7 +38,7 @@ use YandexDisk\YandexDiskWorker;
 //     $sqlNewUser->execute();
 // }
  $test = new YandexDiskWorker();
- var_dump($test->sendQueryYaDisk('te'));
+ var_dump($test->sendQueryYaDisk('http://rutor.info/'));
 ?>
 
 <div>
