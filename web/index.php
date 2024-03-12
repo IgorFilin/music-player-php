@@ -38,9 +38,20 @@ use YandexDisk\YandexDiskWorker;
 //     $sqlNewUser->execute();
 // }
  $test = new YandexDiskWorker();
- echo '<pre>';
- var_dump($test->getDiskInfo());
- echo '</pre>';
+ $file = $test->getDiskResources();
+//  echo '<pre>';
+//   var_dump($file);
+//  echo '</pre>';
+
+ $fileUrl = $file['items'][0]['file'];
+
+ $audioData = base64_encode(file_get_contents($fileUrl));
+
+ // Вставка в HTML
+ echo '<audio controls>
+         <source src="data:audio/mpeg;base64,' . $audioData . '" type="audio/mpeg">
+         Your browser does not support the audio element.
+       </audio>';
 ?>
 
 <div>

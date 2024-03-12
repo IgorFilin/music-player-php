@@ -68,5 +68,9 @@ class YandexDiskWorker {
    public function getDiskInfo() {
     return $this->sendQueryYaDisk('https://cloud-api.yandex.net/v1/disk/');
    }
+
+   public function getDiskResources() {
+    return $this->sendQueryYaDisk('https://cloud-api.yandex.net/v1/disk/resources/files?media_type=audio');
+   }
    
 }
