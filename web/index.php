@@ -1,5 +1,5 @@
 <?php
-require_once'./classes/YandexDiskWorker.php';
+require_once($_SERVER['DOCUMENT_ROOT'] . '/classes/YandexDiskWorker.php');
 use YandexDisk\YandexDiskWorker;
 // $databaseHost = 'db';
 // $databaseUsername = 'root';
@@ -38,7 +38,9 @@ use YandexDisk\YandexDiskWorker;
 //     $sqlNewUser->execute();
 // }
  $test = new YandexDiskWorker();
- var_dump($test->sendQueryYaDisk('http://rutor.info/'));
+ echo '<pre>';
+ var_dump($test->sendQueryYaDisk('https://cloud-api.yandex.net/v1/disk/'));
+ echo '</pre>';
 ?>
 
 <div>

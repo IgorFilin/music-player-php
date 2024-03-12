@@ -1,10 +1,16 @@
 <?php
+
 namespace YandexDisk;
+
+require_once($_SERVER['DOCUMENT_ROOT'] .'/systemFiles/constants.php');
+
 /**
  * YandexDiskWorker
  * 
+ * 
  * Класс для работы с api yandex диска
  */
+
 class YandexDiskWorker {
   /**
    * Method sendQueryYaDisk
@@ -18,18 +24,39 @@ class YandexDiskWorker {
 
    public function __construct() {
    }
+   
+   /**
+    * sendQueryYaDisk
+    *
+    * Метод для создания запроса
+    *
+    * @param  mixed $urlQuery
+    * @param  mixed $methodQuery
+    * @return array
+    */
+   public function sendQueryYaDisk (string $urlQuery, string $methodQuery = 'GET'): array {
+    $ch = curl_init($urlQuery);
+    switch ($methodQuery) {
+        case 'PUT':
+            curl_setopt($ch, CURLOPT_PUT, true);
+            break;
+        // case 'POST':
+        //     curl_setopt($ch, CURLOPT_POST, 1);
+        //     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($arrQuery));
+        //     break;
+        case 'DELETE':
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+            break;
+    }
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: OAuth ' . ya_token]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    $resultQuery = curl_exec($ch);
+    curl_close($ch);
 
-   public function sendQueryYaDisk (string $urlQuery, string $methodQuery = 'GET'):void {
-     $arrayRequest = [
-      'GET'    => 'CURLOPT_URL',
-      'POST'   => 'CURLOPT_POST',
-      'PUT'    => 'CURLOPT_PUT',
-      'DELETE' => 'CURLOPT_CUSTOMREQUEST',
-     ];
-     $curl = curl_init($urlQuery);
-
-     curl_setopt($curl,$arrayRequest[$methodQuery],true);
-     $resultQuery = curl_exec($curl);
-     var_dump($resultQuery);
+    return (!empty($resultQuery)) ? json_decode($resultQuery, true) : [];
    }
+
+   
 }
