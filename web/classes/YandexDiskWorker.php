@@ -57,6 +57,16 @@ class YandexDiskWorker {
 
     return (!empty($resultQuery)) ? json_decode($resultQuery, true) : [];
    }
-
+   
+   /**
+    * getDiskInfo
+    * 
+    * Метод возвращающий общую информацию о диске
+    *
+    * @return array
+    */
+   public function getDiskInfo() {
+    return $this->sendQueryYaDisk('https://cloud-api.yandex.net/v1/disk/');
+   }
    
 }

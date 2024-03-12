@@ -39,7 +39,7 @@ use YandexDisk\YandexDiskWorker;
 // }
  $test = new YandexDiskWorker();
  echo '<pre>';
- var_dump($test->sendQueryYaDisk('https://cloud-api.yandex.net/v1/disk/'));
+ var_dump($test->getDiskInfo());
  echo '</pre>';
 ?>
 
